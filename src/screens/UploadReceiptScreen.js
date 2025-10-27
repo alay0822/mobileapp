@@ -19,60 +19,63 @@ const UploadReceiptScreen = ({ navigation }) => {
   }, []);
 
   const pickImage = async () => {
-  setModalVisible(false);
-  const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    allowsEditing: false, // 🔴 DISABLE editing
-    quality: 1,
-  });
-  if (!result.canceled) {
-    setSelectedImage(result.assets[0].uri);
-  }
-};
-
-const openCamera = async () => {
-  setModalVisible(false);
-  const result = await ImagePicker.launchCameraAsync({
-    allowsEditing: false, // 🔴 DISABLE editing
-    quality: 1,
-  });
-  if (!result.canceled) {
-    setSelectedImage(result.assets[0].uri);
-  }
-};
-
-
-  // UploadReceiptScreen.js
-const handleUpload = () => {
-  if (selectedImage) {
-    alert('Receipt Uploaded Successfully!');
-    navigation.navigate('ReceiptViewScreen', { 
-      receiptImageUri: selectedImage,
-      billData: {
-        id: 17,
-        dueDate: '2021/4/16',
-        status: 'Paid',
-        total: 3133
-      }
+    setModalVisible(false);
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false, // 🔴 DISABLE editing
+      quality: 1,
     });
-  } else {
-    alert('Please select an image first');
-  }
-};
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
 
-const handleCancel = () => {
-  setSelectedImage(null); // clears the uploaded image
-  navigation.navigate('AccountInfo');
-}; 
+  const openCamera = async () => {
+    setModalVisible(false);
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: false, // 🔴 DISABLE editing
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
+
+  const handleUpload = () => {
+    if (selectedImage) {
+      // Show success alert first
+      alert('Receipt Uploaded Successfully!');
+      
+      // Ensure navigation happens right after the alert is dismissed
+      setTimeout(() => {
+        navigation.navigate('ReceiptViewScreen', { 
+          receiptImageUri: selectedImage,
+          billData: {
+            id: 17,
+            dueDate: '2021/4/16',
+            status: 'Paid',
+            total: 3133
+          }
+        });
+      }, 2000); // 200ms delay to make sure alert has time to be dismissed
+    } else {
+      alert('Please select an image first');
+    }
+  };
+
+  const handleCancel = () => {
+    setSelectedImage(null); // clears the uploaded image
+    navigation.navigate('AccountInfo'); // Change this to navigate to AccountInfoScreen
+  };
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('BillingHistory')}>
+        <TouchableOpacity onPress={() => navigation.navigate('AccountInfo')}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerText}>Upload Receipt</Text>
+        <Text style={styles.headerText}> Upload Receipt</Text>
       </View>
 
       {/* Main Content */}
@@ -83,7 +86,7 @@ const handleCancel = () => {
           ) : (
             <>
               <Ionicons name="image-outline" size={50} color="#888" />
-              <Text style={styles.uploadText}>Choose Image</Text>
+              <Text style={styles.uploadText}> Tap to Choose Image</Text>
             </>
           )}
         </TouchableOpacity>
@@ -93,8 +96,8 @@ const handleCancel = () => {
             <Text style={styles.buttonText}>Upload</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.button, styles.othersButton]} onPress={handleCancel}>
-    <Text style={styles.buttonText}>Cancel</Text>
-  </TouchableOpacity>
+            <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -125,7 +128,6 @@ const handleCancel = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -147,17 +149,16 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
   },
- uploadBox: {
-  borderWidth: 2,
-  borderColor: '#ddd',
-  borderStyle: 'dashed',
-  borderRadius: 10,
-  height: 500, // Optional tweak here
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginBottom: 20,
-  padding: 10,
-
+  uploadBox: {
+    borderWidth: 2,
+    borderColor: '#ddd',
+    borderStyle: 'dashed',
+    borderRadius: 10,
+    height: 500, // Optional tweak here
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    padding: 10,
   },
   uploadText: {
     fontSize: 16,
@@ -165,14 +166,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   image: {
-  width: '100%',
-  height: 500, // or any fixed height you prefer
-  resizeMode: 'contain', // ✅ shows full image without crop
-  borderRadius: 8,
-},
-
-
-
+    width: '100%',
+    height: 500, // or any fixed height you prefer
+    resizeMode: 'contain', // ✅ shows full image without crop
+    borderRadius: 8,
+  },
   buttonRow: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -194,7 +192,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    
   },
   othersButton: {
     backgroundColor: '#4d88ff',
@@ -233,6 +230,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
   }
-
 });
-export default UploadReceiptScreen; // ✅ this line must exist
+
+export default UploadReceiptScreen;

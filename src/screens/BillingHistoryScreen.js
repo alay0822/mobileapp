@@ -30,7 +30,7 @@ const BillingHistoryScreen = ({ navigation }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('AccountInfo')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Billing History</Text>
@@ -70,9 +70,10 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#2a1eff',
     paddingTop: 50,
-    padding: 16,
+    padding: 15,
     flexDirection: 'row',
     alignItems: 'center',
+    height: 90,
   },
   headerTitle: {
     color: '#fff',

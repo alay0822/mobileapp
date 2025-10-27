@@ -23,12 +23,12 @@ const NotificationsScreen = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('AccountInfo')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Notifications</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
-        <Ionicons name="chatbubble-ellipses-outline" size={24} color="#fff" />
+          <Ionicons name="chatbubble-ellipses-outline" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
 
@@ -65,17 +65,20 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#2a1eff',
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 15,
+    height: 90,
   },
   headerTitle: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    alignSelf: 'flex-start',  // Align the title to the left
+    marginLeft: 10, // Add some space from the left edge
+    flex: 1,  // Ensure it takes up space to the left
   },
 
   toggleContainer: {

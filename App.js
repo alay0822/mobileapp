@@ -1,12 +1,12 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'react-native';
+import { I18nManager } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import IntroScreen from './src/screens/IntroScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import AccountInfoScreen from './src/screens/AccountInfoScreen';
-import MenuScreen from './src/screens/MenuScreen';
 import UploadReceiptScreen from './src/screens/UploadReceiptScreen';
 import BillingHistoryScreen from './src/screens/BillingHistoryScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
@@ -14,12 +14,18 @@ import ChatScreen from './src/screens/ChatScreen';
 import ReceiptViewScreen from './src/screens/ReceiptViewScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import LogoutScreen from './src/screens/LogoutScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
+import ChangePasswordScreen from './src/screens/ChangePasswordScreen';
+import ProfileSettingsScreen from './src/screens/ProfileSettingsScreen';
+import SettingsScreen from './src/screens/SettingsScreen';  
+import ServicesScreen from './src/screens/ServicesScreen';
+import AboutUsScreen from './src/screens/AboutUsScreen';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
+
+    
   return (
     <>
       <StatusBar hidden />
@@ -35,9 +41,16 @@ const App = () => {
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
           <Stack.Screen name="Logout" component={LogoutScreen} />
           <Stack.Screen name="AccountInfo" component={AccountInfoScreen} />
+          <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} /> 
+          <Stack.Screen name="ProfileSettingsScreen" component={ProfileSettingsScreen} />
+          <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+          <Stack.Screen name="ServicesScreen" component={ServicesScreen} />
+          <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} />
+             
+
           <Stack.Screen
             name="Menu"
-            component={MenuScreen}
+            component={AccountInfoScreen}
             options={{
               cardStyleInterpolator: ({ current, layouts }) => ({
                 cardStyle: {
@@ -58,7 +71,8 @@ const App = () => {
           <Stack.Screen name="Notifications" component={NotificationsScreen} />
           <Stack.Screen name="Chat" component={ChatScreen} />
           <Stack.Screen name="ReceiptViewScreen" component={ReceiptViewScreen} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          
+          
         </Stack.Navigator>
       </NavigationContainer>
     </>

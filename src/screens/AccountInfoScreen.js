@@ -79,12 +79,8 @@ const AccountInfoScreen = () => {
   const MenuItem = ({ icon, title, onPress }) => (
     <TouchableOpacity
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.menuItem,
-        {
-          backgroundColor: pressed ? '#e0e4ff' : '#f9f9f9',
-        },
-      ]}
+      style={styles.menuItem}
+      activeOpacity={0.7}
     >
       <View style={styles.menuItemContent}>
         <Ionicons name={icon} size={24} color="#2a1eff" style={styles.menuIcon} />
@@ -160,7 +156,8 @@ const AccountInfoScreen = () => {
               <View style={styles.menuOptions}>
                 <MenuItem icon="notifications" title="Notifications" onPress={() => navigation.navigate('Notifications')} />
                 <MenuItem icon="time" title="History" onPress={() => navigation.navigate('BillingHistory')} />
-                <MenuItem icon="help-circle" title="About Us" onPress={() => navigation.navigate('About Us')} />
+                <MenuItem icon="settings" title="Settings" onPress={() => navigation.navigate('SettingsScreen')} />
+                <MenuItem icon="construct" title="Services" onPress={() => navigation.navigate('ServicesScreen')} />
               </View>
 
               {/* Logout Button at Bottom */}
@@ -184,6 +181,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2a1eff',
     padding: 15,
     paddingTop: 50,
+    height: 90,
+
   },
   headerText: {
     color: '#fff',

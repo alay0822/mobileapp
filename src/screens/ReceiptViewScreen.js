@@ -25,7 +25,7 @@ const ReceiptViewScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('BillingHistory')}>
+        <TouchableOpacity onPress={() => navigation.navigate('AccountInfo')}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Receipt</Text>
@@ -78,7 +78,7 @@ const ReceiptViewScreen = ({ route, navigation }) => {
         onPress={handleDownload}
       >
         <Ionicons name="download-outline" size={20} color="#fff" />
-        <Text style={styles.downloadButtonText}>Download Receipt</Text>
+        <Text style={styles.downloadButtonText}>Done</Text>
       </TouchableOpacity>
     </View>
   );
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 90,
   },
   headerTitle: {
     color: '#fff',

@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
+  const [fadeAnim] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // 👁 toggle visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
     navigation.navigate('AccountInfo');
@@ -20,8 +30,16 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+      
+      {/* 👇 LOGO */}
+      <Image 
+        source={require('../assets/LOGO.png')} // ibutang imong logo diri
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
+      <Text style={styles.title}>PayRentv2</Text>
       
       <Text style={styles.label}>Username</Text>
       <TextInput
@@ -46,20 +64,15 @@ const LoginScreen = ({ navigation }) => {
       </View>
 
       <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={styles.forgotPassword}>Forget Password</Text>
+        <Text style={styles.forgotPassword}>Forgot Password</Text>
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
+
       
-      <View style={styles.signUpContainer}>
-        <Text style={styles.signUpText}>Do you have an account? </Text>
-        <TouchableOpacity onPress={handleSignUp}>
-          <Text style={styles.signUpLink}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -69,6 +82,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#fff',
+  },
+  logo: {
+    width: 120,   // pwede nimo adjust
+    height: 120,
+    alignSelf: 'center',
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
@@ -92,8 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 12,
     fontSize: 16,
-    paddingRight: 45, // space for eye icon
-    
+    paddingRight: 45,
   },
   eyeIcon: {
     position: 'absolute',
@@ -118,20 +136,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  signUpContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signUpText: {
-    fontSize: 14,
-    color: '#4d88ff',
-  },
-  signUpLink: {
-    color: '#3498db',
-    fontWeight: 'bold',
-    fontSize: 14,
   },
 });
 

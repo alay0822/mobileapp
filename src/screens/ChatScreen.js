@@ -8,11 +8,12 @@ import {
   FlatList, 
   Image,
   KeyboardAvoidingView,
-  Platform,
-  SafeAreaView
+  Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const initialMessages = [
   {
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
+    height: 90,
   },
   profileRow: {
     flexDirection: 'row',
